@@ -47,6 +47,7 @@ import 'impl/stellar_wallet.dart';
 import 'impl/sub_wallets/eth_token_wallet.dart';
 import 'impl/tezos_wallet.dart';
 import 'impl/wownero_wallet.dart';
+import 'impl/xelis_wallet.dart';
 import 'intermediate/cryptonote_wallet.dart';
 import 'wallet_mixin_interfaces/electrumx_interface.dart';
 import 'wallet_mixin_interfaces/lelantus_interface.dart';
@@ -394,6 +395,9 @@ abstract class Wallet<T extends CryptoCurrency> {
 
       case const (Wownero):
         return WowneroWallet(net);
+
+      case const (Xelis):
+        return XelisWallet(net);
 
       default:
         // should never hit in reality
