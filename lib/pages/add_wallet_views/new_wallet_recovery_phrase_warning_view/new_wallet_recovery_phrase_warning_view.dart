@@ -38,6 +38,7 @@ import '../../../widgets/desktop/desktop_scaffold.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../widgets/rounded_container.dart';
 import '../../../widgets/rounded_white_container.dart';
+import '../../../widgets/xelis_table_progress.dart';
 import '../new_wallet_options/new_wallet_options_view.dart';
 import '../new_wallet_recovery_phrase_view/new_wallet_recovery_phrase_view.dart';
 import 'recovery_phrase_explanation_dialog.dart';
@@ -462,10 +463,19 @@ class _NewWalletRecoveryPhraseWarningViewState
                                                 barrierDismissible: false,
                                                 useSafeArea: true,
                                                 builder: (ctx) {
-                                                  return const Center(
-                                                    child: LoadingIndicator(
-                                                      width: 50,
-                                                      height: 50,
+                                                  return Center(
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        const LoadingIndicator(
+                                                          width: 50,
+                                                          height: 50,
+                                                        ),
+                                                        if (widget.coin is Xelis) ...[
+                                                          const SizedBox(height: 16),
+                                                          const XelisTableProgress(),
+                                                        ],
+                                                      ],
                                                     ),
                                                   );
                                                 },
@@ -563,9 +573,10 @@ class _NewWalletRecoveryPhraseWarningViewState
                                             // TODO: Refactor these to generate each coin in their respective classes
                                             // This code should not be in a random view page file
                                             if (coin is Monero ||
-                                                coin is Wownero) {
+                                                coin is Wownero ||
+                                                coin is Xelis) {
                                               // currently a special case due to the
-                                              // xmr/wow libraries handling their
+                                              // xmr/wow/xelis libraries handling their
                                               // own mnemonic generation
                                             } else if (wordCount > 0) {
                                               if (ref

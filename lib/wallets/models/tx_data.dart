@@ -73,6 +73,9 @@ class TxData {
   final List<TxData>? sparkMints;
   final List<SparkCoin>? usedSparkCoins;
 
+  // xelis specific
+  final String? otherData;
+
   final TransactionV2? tempTx;
 
   final bool ignoreCachedBalanceChecks;
@@ -109,6 +112,7 @@ class TxData {
     this.mintsMapLelantus,
     this.tezosOperationsList,
     this.sparkRecipients,
+    this.otherData,
     this.sparkMints,
     this.usedSparkCoins,
     this.tempTx,
@@ -135,6 +139,11 @@ class TxData {
     }
 
     return null;
+  }
+
+  String? get getOtherData {
+    final val = this.otherData;
+    return val;
   }
 
   Amount? get amountSpark =>
@@ -208,6 +217,7 @@ class TxData {
     String? note,
     String? noteOnChain,
     String? memo,
+    String? otherData,
     Set<UTXO>? utxos,
     List<UTXO>? usedUTXOs,
     List<TxRecipient>? recipients,
@@ -252,6 +262,7 @@ class TxData {
       note: note ?? this.note,
       noteOnChain: noteOnChain ?? this.noteOnChain,
       memo: memo ?? this.memo,
+      otherData: otherData ?? this.otherData,
       utxos: utxos ?? this.utxos,
       usedUTXOs: usedUTXOs ?? this.usedUTXOs,
       recipients: recipients ?? this.recipients,
@@ -314,6 +325,7 @@ class TxData {
       'sparkRecipients: $sparkRecipients, '
       'sparkMints: $sparkMints, '
       'usedSparkCoins: $usedSparkCoins, '
+      'otherData: $otherData, '
       'tempTx: $tempTx, '
       'ignoreCachedBalanceChecks: $ignoreCachedBalanceChecks, '
       '}';

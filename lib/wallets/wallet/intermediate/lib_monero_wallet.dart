@@ -178,6 +178,7 @@ abstract class LibMoneroWallet<T extends CryptonoteCurrency>
     }
   }
 
+  @override
   Future<void> open() async {
     bool wasNull = false;
 
