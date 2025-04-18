@@ -44,6 +44,10 @@ class AddressUtils {
     try {
       final u = Uri.parse(uri);
       if (u.hasScheme) {
+        if (u.scheme == "xel" || u.scheme == "xet") { // these are just address prefixes in the case of Xelis
+          return result;
+        }
+
         result["scheme"] = u.scheme.toLowerCase();
 
         // Handle different URI formats.
